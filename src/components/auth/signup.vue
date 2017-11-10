@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
-    <div class="card">
-      <div class="card-header text-white bg-primary">
+    <div class="card card-custom">
+      <div class="card-header text-white">
         Create a new Account
       </div>
       <div class="card-body">
