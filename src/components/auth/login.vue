@@ -34,7 +34,7 @@
 
           <div class="row justify-content-center">
             <div class="col-md-4">
-              <input type="submit" value="Login" class="btn btn-primary" style="display: inline-block; width: 200px;" />
+              <input type="submit" value="Login" class="btn btn-primary" style="display: inline-block; width: 200px;" :disabled="errors.any()" />
 
             </div>
           </div>
@@ -72,8 +72,8 @@ export default {
             if(data.auth) {
               this.email = '';
               this.password = '';
-              this.errors.clear();
               this.$store.dispatch('setToken', data.token);
+
 
               this.$http.get('https://quiz-system-api.herokuapp.com/api/auth/me').then(response => response.json(), error => error.json())
                 .then(data => {
@@ -87,7 +87,7 @@ export default {
             } else {
               this.message = data.msg;
             }
-          });
+          }).then(()=> this.errors.clear());
         }
       }
     }

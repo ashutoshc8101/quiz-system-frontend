@@ -18,7 +18,7 @@
           <div class="form-group row" :class="{'has-error': errors.has('name') }">
             <label for="name" class="control-label col-md-4">Name:</label>
             <div class="col-md-8">
-              <input type="text" name="name" v-validate="'required|alpha_num'" placeholder="someone" class="form-control" v-model="name" />
+              <input type="text" name="name" v-validate="'required|required'" placeholder="someone" class="form-control" v-model="name" />
               <p class="text-danger" v-if="errors.has('name')">{{ errors.first('name') }}</p>
             </div>
           </div>
@@ -51,7 +51,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-md-4">
-              <input type="submit" value="Sign Up" class="btn btn-primary" style="display: inline-block; width: 200px;" />
+              <input type="submit" value="Sign Up" class="btn btn-primary" style="display: inline-block; width: 200px;" :disabled="errors.any() || this.cnfrnpassword !== this.password" />
 
             </div>
           </div>
@@ -97,7 +97,7 @@ export default {
               this.email = '';
               this.password = '';
               this.cnfrnpassword = '';
-              this.errors.clear();
+
 
               this.$store.dispatch('setToken', data.token);
 
@@ -113,7 +113,7 @@ export default {
             }else {
               this.message = data.msg;
             }
-          });
+          }).then(()=> this.errors.clear());
         }
       }
     }
