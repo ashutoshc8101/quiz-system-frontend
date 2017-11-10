@@ -11,8 +11,8 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <template v-if="!getAuthState">
-            <router-link :to="{ name : 'Login'}" tag="li" class="nav-item" active-class="active"><a class="nav-link login">Log In</a></router-link>
-            <router-link :to="{ name : 'SignUp'}" tag="li" class="nav-item" active-class="active"><a class="nav-link register">Register</a></router-link>
+            <router-link :to="{ name : 'Login'}" tag="li" class="nav-item" active-class="active login-active"><a class="nav-link login">Log In</a></router-link>
+            <router-link :to="{ name : 'SignUp'}" tag="li" class="nav-item" active-class="active register-active"><a class="nav-link register">Register</a></router-link>
           </template>
           <template v-if="getAuthState">
             <li class="nav-item"><a href="javascript.void(0)" class="nav-link" @click.prevent="logout">Logout</a></li>
@@ -65,8 +65,8 @@ export default {
     }
 
     .nav-link {
-      color: $navColor !important;
-      transition: color 0.2s;
+      color: $navColor;
+      transition: all 0.2s;
       &:hover{
         color: #222 !important;
       }
@@ -80,7 +80,11 @@ export default {
       }
     }
 
-    .register{
+    .active.login-active a{
+      color: crimson !important;
+    }
+
+    .active.register-active a{
       color: $primaryColor !important;
     }
 

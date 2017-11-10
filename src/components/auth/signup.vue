@@ -51,13 +51,17 @@
             <div class="col-md-8">
               <input type="password" name="cp" placeholder="top-secret" v-validate="'required|confirmed:password'"
                class="form-control form-control-custom" v-model="cnfrnpassword"
-               :data-toggle=" errors.has('cp') ? 'tooltip': ''" @click.once="cnfrntouched = true" data-placement="top" :title="errors.has('cp') ? errors.next('cp') : '' " :aria-invalid="errors.has('cp')"  />
+               :data-toggle=" errors.has('cp') ? 'tooltip': ''"
+                data-placement="top" :title="errors.has('cp') ? errors.next('cp') : '' "
+                 />
 
             </div>
           </div>
           <div class="row justify-content-center">
             <div class="col-md-4">
-              <input type="submit" value="Sign Up" class="btn btn-custom" style="display: inline-block; width: 200px;" :disabled="errors.any() || this.cnfrnpassword !== this.password" />
+              <input type="submit" value="Sign Up"
+               class="btn btn-custom" style="display: inline-block; width: 200px;"
+               :disabled="errors.any() || this.cnfrnpassword !== this.password" />
 
             </div>
           </div>
@@ -114,7 +118,7 @@ export default {
             }else {
               this.message = data.msg;
             }
-          }).then(()=> this.errors.clear());
+          }).then(()=> this.$validator.reset()).then(()=> this.errors.clear());
         }
       }
     }

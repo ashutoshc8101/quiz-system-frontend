@@ -4,13 +4,14 @@ import VeeValidate from 'vee-validate';
 import VueResource from 'vue-resource';
 import router from './router/routes';
 import store from './store/store';
+import config from './validation/config';
 
 import './assets/scss/styles.scss';
 
 Vue.config.productionTip = false;
 
 Vue.use(VueResource);
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, config);
 
 
 // Vue.http.options.root = 'https://quiz-system-api.herokuapp.com/api';
