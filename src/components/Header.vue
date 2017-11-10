@@ -1,8 +1,9 @@
 <template lang="html">
 
   <div>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <router-link :to="{name : 'Home'}" class="navbar-brand">Quiz-App</router-link>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+
+        <router-link :to="{name : 'Home'}" class="navbar-brand"><img src="./../assets/lion.svg" /> Quiz-App</router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
@@ -46,5 +47,17 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
+@import '../assets/scss/variables.scss';
+  .navbar.navbar-expand-lg{
+  background-color: $primaryColor;
+    height: 60px;
+  }
+
+  .navbar-brand img{
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+  }
+
 </style>
