@@ -5,6 +5,8 @@ import VueResource from 'vue-resource';
 import router from './router/routes';
 import store from './store/store';
 
+import './assets/scss/styles.scss';
+
 Vue.config.productionTip = false;
 
 Vue.use(VueResource);

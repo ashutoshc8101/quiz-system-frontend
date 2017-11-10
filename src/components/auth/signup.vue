@@ -18,16 +18,19 @@
           <div class="form-group row" :class="{'has-error': errors.has('name') }">
             <label for="name" class="control-label col-md-4">Name:</label>
             <div class="col-md-8">
-              <input type="text" name="name" v-validate="'required|required'" placeholder="someone" class="form-control" v-model="name" />
-              <p class="text-danger" v-if="errors.has('name')">{{ errors.first('name') }}</p>
+              <input type="text" name="name" v-validate="'required|required'"
+               placeholder="someone" class="form-control form-control-custom"
+                v-model="name" :data-toggle=" errors.has('name') ? 'tooltip': ''" data-placement="top" :title="errors.first('name')" />
             </div>
           </div>
 
           <div class="form-group row" :class="{'has-error': errors.has('email') }">
             <label for="email" class="control-label col-md-4">Email:</label>
             <div class="col-md-8">
-              <input type="text" name="email" v-validate="'required|email'" placeholder="someone@somewhere.com" class="form-control" v-model="email" />
-              <p class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</p>
+              <input type="text" name="email" v-validate="'required|email'"
+               placeholder="someone@somewhere.com" class="form-control form-control-custom"
+                v-model="email"
+                :data-toggle=" errors.has('email') ? 'tooltip': ''" data-placement="top" :title="errors.first('email')"  />
 
             </div>
           </div>
@@ -35,23 +38,26 @@
           <div class="form-group row" :class="{'has-error': errors.has('password') }">
             <label for="password" class="control-label col-md-4">Password:</label>
             <div class="col-md-8">
-              <input type="password" v-validate="'required|min:6'" name="password" placeholder="top-secret" class="form-control" v-model="password" />
-              <p class="text-danger" v-if="errors.has('password')">{{ errors.first('password') }}</p>
+              <input type="password" v-validate="'required|min:6'"
+              name="password" placeholder="top-secret"
+               class="form-control form-control-custom" v-model="password"
+               :data-toggle=" errors.has('password') ? 'tooltip': ''" data-placement="top" :title="errors.first('password')"  />
 
             </div>
           </div>
 
-          <div class="form-group row" :class="{'has-error': cnfrn }">
+          <div class="form-group row" :class="{'has-error': errors.has('cp') }">
             <label for="cp" class="control-label col-md-4">Confirm Password:</label>
             <div class="col-md-8">
-              <input type="password" name="cp" placeholder="top-secret" class="form-control" v-model="cnfrnpassword" />
-              <p class="text-danger" v-if="cnfrn">Passwords must match</p>
+              <input type="password" name="cp" placeholder="top-secret" v-validate="'required|confirmed:password'"
+               class="form-control form-control-custom" v-model="cnfrnpassword"
+               :data-toggle=" errors.has('cp') ? 'tooltip': ''" @click.once="cnfrntouched = true" data-placement="top" :title="errors.has('cp') ? errors.next('cp') : '' " :aria-invalid="errors.has('cp')"  />
 
             </div>
           </div>
           <div class="row justify-content-center">
             <div class="col-md-4">
-              <input type="submit" value="Sign Up" class="btn btn-primary" style="display: inline-block; width: 200px;" :disabled="errors.any() || this.cnfrnpassword !== this.password" />
+              <input type="submit" value="Sign Up" class="btn btn-custom" style="display: inline-block; width: 200px;" :disabled="errors.any() || this.cnfrnpassword !== this.password" />
 
             </div>
           </div>
@@ -72,15 +78,10 @@ export default {
       email: '',
       password: '',
       cnfrnpassword: '',
-      message : ''
+      message : '',
     };
   },
 
-  computed:{
-    cnfrn(){
-      return this.password != this.cnfrnpassword;
-    }
-  },
   methods:{
     submit(){
       if(this.name !== '' && this.email !== '' && this.password !== '' && this.cnfrnpassword !== '' && this.cnfrnpassword === this.password){
