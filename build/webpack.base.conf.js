@@ -10,7 +10,7 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    'vendor': ['vue', 'vue-router'],
+    'vendor': ['vue', 'vue-router', 'vee-validate', 'vuex'],
     'app' : './src/main.js'
   },
   output: {
