@@ -13,8 +13,7 @@ Vue.config.productionTip = false;
 Vue.use(VueResource);
 Vue.use(VeeValidate, config);
 
-
-// Vue.http.options.root = 'https://quiz-system-api.herokuapp.com/api';
+Vue.http.options.root = 'https://quiz-system-api.herokuapp.com/api';
 
 new Vue({
   el: '#app',

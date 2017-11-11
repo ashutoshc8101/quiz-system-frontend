@@ -2,8 +2,7 @@
   "name": "quiz-system-vue-frontend",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "dromestrome <ashutoshc8101@gmail.com>",
-  "private": true,
+  "author": "dromestrome",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "npm run dev",

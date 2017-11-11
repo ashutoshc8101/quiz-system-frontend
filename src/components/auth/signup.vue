@@ -46,13 +46,13 @@
             </div>
           </div>
 
-          <div class="form-group row" :class="{'has-error': errors.has('cp') }">
+          <div class="form-group row" :class="{'has-error': errors.has('cnfrnpassword') }">
             <label for="cp" class="control-label col-md-4">Confirm Password:</label>
             <div class="col-md-8">
-              <input type="password" name="cp" placeholder="top-secret" v-validate="'required|confirmed:password'"
+              <input type="password" name="cnfrnpassword" placeholder="top-secret" v-validate="'required|confirmed:password'"
                class="form-control form-control-custom" v-model="cnfrnpassword"
-               :data-toggle=" errors.has('cp') ? 'tooltip': ''"
-                data-placement="top" :title="errors.has('cp') ? errors.next('cp') : '' "
+               :data-toggle=" errors.has('cnfrnpassword') ? 'tooltip': ''"
+                data-placement="top" :title="errors.has('cnfrnpassword') ? errors.first('cnfrnpassword') : '' "
                  />
 
             </div>
@@ -61,7 +61,7 @@
             <div class="col-md-4">
               <input type="submit" value="Sign Up"
                class="btn btn-custom" style="display: inline-block; width: 200px;"
-               :disabled="errors.any() || this.cnfrnpassword !== this.password" />
+               :disabled="errors.any()" />
 
             </div>
           </div>
@@ -88,9 +88,9 @@ export default {
 
   methods:{
     submit(){
-      if(this.name !== '' && this.email !== '' && this.password !== '' && this.cnfrnpassword !== '' && this.cnfrnpassword === this.password){
-        if(!this.errors.items[0]){
-          this.$http.post('https://quiz-system-api.herokuapp.com/api/auth/register', {
+        this.$validator.validateAll();
+        if(!this.errors.any()){
+          this.$http.post('auth/register', {
           	email: this.email,
           	name: this.name,
           	password: this.password
@@ -106,7 +106,7 @@ export default {
 
               this.$store.dispatch('setToken', data.token);
 
-              this.$http.get('https://quiz-system-api.herokuapp.com/api/auth/me').then(response => response.json(), error => error.json())
+              this.$http.get('auth/me').then(response => response.json(), error => error.json())
                 .then(data => {
                   if(data.status) {
                     this.$store.dispatch('setUser', data.user);
@@ -120,7 +120,7 @@ export default {
             }
           }).then(()=> this.$validator.reset()).then(()=> this.errors.clear());
         }
-      }
+
     }
   }
 

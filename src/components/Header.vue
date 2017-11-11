@@ -82,13 +82,15 @@ export default {
 
     .active.login-active a{
       color: crimson !important;
-    }
 
+      }
     .active.register-active a{
       color: $primaryColor !important;
     }
 
   }
+
+
 
 
 

@@ -20,7 +20,7 @@
               <input type="text" name="email" v-validate="'required|email'"
                placeholder="someone@somewhere.com"
                 class="form-control form-control-custom" v-model="email" :data-toggle=" errors.has('email') ? 'tooltip': ''"
-                data-placement="top" :title="errors.has('email') ? errors.next('email') : '' "/>
+                data-placement="top" :title="errors.has('email') ? errors.collect('email') : '' "/>
 
             </div>
           </div>
@@ -31,7 +31,7 @@
               <input type="password" v-validate="'required|min:6'" name="password"
               placeholder="top-secret" class="form-control form-control-custom"
                v-model="password" :data-toggle=" errors.has('password') ? 'tooltip': ''"
-                data-placement="top" :title="errors.has('password') ? errors.next('password') : '' "
+                data-placement="top" :title="errors.has('password') ? errors.collect('password') : '' "
                />
             </div>
           </div>
@@ -65,9 +65,9 @@ export default {
 
   methods: {
     login(){
-      if(this.email !== '' && this.password !== '') {
-        if(!this.errors.items[0]) {
-          this.$http.post('https://quiz-system-api.herokuapp.com/api/auth/login', {
+        this.$validator.validateAll();
+        if(!this.errors.any()) {
+          this.$http.post('auth/login', {
             email: this.email,
             password: this.password
           }).then(response => {
@@ -79,7 +79,7 @@ export default {
               this.$store.dispatch('setToken', data.token);
 
 
-              this.$http.get('https://quiz-system-api.herokuapp.com/api/auth/me').then(response => response.json(), error => error.json())
+              this.$http.get('auth/me').then(response => response.json(), error => error.json())
                 .then(data => {
                   if(data.status) {
                     this.$store.dispatch('setUser', data.user);
@@ -93,7 +93,6 @@ export default {
             }
           }).then(()=> this.$validator.reset()).then(()=> this.errors.clear());
         }
-      }
     }
   }
 
